@@ -1,0 +1,36 @@
+name: Manual Trigger with Workflow Dispatch
+
+on:
+    workflow_dispatch:
+        inputs:
+            name:
+                description: 'Provide a name'
+                required: true
+                type: string
+            greeting:
+                description: 'Provide a greeting'
+                required: true
+                type: string
+            data:
+                description: 'Provide a base64 encoded file content'
+                required: false
+                type: string
+            number:
+                description: 'Provide a number'
+                required: true
+                type: number
+                
+jobs:
+    job_1:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Decode File Content
+              run: echo "{{ inputs.data }}" | base64 --decode > ./file/decoded_file.txt   
+            - name: Display Greeting
+              run: echo "{{ inputs.greeting }}, {{ inputs.name }}!"
+            - name: Display File Content
+              run: |
+                echo "Contents of the file:"
+                cat ./file/decoded_file.txt
+            - name: Display Number
+              run: echo "The provided number is {{ inputs.number }}"          
