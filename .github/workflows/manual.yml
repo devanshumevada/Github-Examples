@@ -27,7 +27,7 @@ jobs:
             - name: Decode File Content
               run: |
                   mkdir -p ./file
-                  echo "{{ inputs.data }}" | base64 --decode > ./file/decoded_file.txt   
+                  echo "{{ inputs.data }}"
             - name: Display Greeting
               run: echo "{{ inputs.greeting }}, {{ inputs.name }}!"
             - name: Display File Content
