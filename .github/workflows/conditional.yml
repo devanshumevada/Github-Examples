@@ -1,8 +1,11 @@
 name: example-workflow
-on: [push]
+on:
+    push:
+        branches:
+            - main
 jobs:
   hello-world:
-    if: github.repository == 'octo-org/octo-repo-prod'
+    if: github.repository == 'devanshumevada/Github-Examples'
     runs-on: ubuntu-latest
     steps:
       - name: "Hello World"
