@@ -5,7 +5,8 @@ on:
        - main
    issues:
      types: [opened]  
- jobs:
+
+jobs:
    expression-functions:
      runs-on: ubuntu-latest
      steps:
