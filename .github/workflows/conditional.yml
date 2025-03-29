@@ -4,6 +4,12 @@ on:
         branches:
             - main
 jobs:
+  print_github_var:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print GitHub Variables
+        run: |
+          echo "${{ toJson(github) }}"  
   hello-world:
     if: github.repository == 'devanshumevada/Github-Examples'
     runs-on: ubuntu-latest
