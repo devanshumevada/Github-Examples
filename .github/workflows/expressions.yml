@@ -1,37 +1,39 @@
-name: Expression Functions Demo
-
-on:
-  push:
-    branches:
-      - main
-    issues:
-        types: [opened]  
-
-jobs:
-  expression-functions:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check if string contains substring
-        if: contains('Hello world', 'llo')
-        run: echo "The string contains the substring."
-      - name: Check if string starts with
-        if: startsWith('Hello world', 'He')
-        run: echo "The string starts with 'He'."
-      - name: Check if string ends with
-        if: endsWith('Hello world', 'ld')
-        run: echo "The string ends with 'ld'."
-      - name: Format and echo string
-        run: echo ${{ format('Hello {0} {1} {2}', 'Mona', 'the', 'Octocat') }}
-      - name: Join issue labels
-        if: github.event_name == 'issues'
-        run: echo "Issue labels: ${{ join(github.event.issue.labels.*.name, ', ') }}"
-      - name: Convert job context to JSON
-        run: echo "Job context in JSON: ${{ toJSON(github.job) }}"
-      - name: Parse JSON string
-        run: echo "Parsed JSON: ${{ fromJSON('{"hello":"world"}').hello }}"
-      - name: Hash files
-        run: echo "Hash of files: ${{ hashFiles('**/package-lock.json', '**/Gemfile.lock') }}
-      - name: The job has succeeded
-        if: ${{ success() }}
-      - name: The job has failed
-        if: ${{ failure() }}
+1| name: Expression Functions Demo
+2| 
+3| on:
+4|   push:
+5|     branches:
+6|       - main
+7|   issues:
+8|     types: [opened]  
+9| 
+10| jobs:
+11|   expression-functions:
+12|     runs-on: ubuntu-latest
+13|     steps:
+14|       - name: Check if string contains substring
+15|         if: contains('Hello world', 'llo')
+16|         run: echo "The string contains the substring."
+17|       - name: Check if string starts with
+18|         if: startsWith('Hello world', 'He')
+19|         run: echo "The string starts with 'He'."
+20|       - name: Check if string ends with
+21|         if: endsWith('Hello world', 'ld')
+22|         run: echo "The string ends with 'ld'."
+23|       - name: Format and echo string
+24|         run: echo ${{ format('Hello {0} {1} {2}', 'Mona', 'the', 'Octocat') }}
+25|       - name: Join issue labels
+26|         if: github.event_name == 'issues'
+27|         run: echo "Issue labels: ${{ join(github.event.issue.labels.*.name, ', ') }}"
+28|       - name: Convert job context to JSON
+29|         run: echo "Job context in JSON: ${{ toJSON(github.job) }}"
+30|       - name: Parse JSON string
+31|         run: echo "Parsed JSON: ${{ fromJSON('{"hello":"world"}').hello }}"
+32|       - name: Hash files
+33|         run: echo "Hash of files: ${{ hashFiles('**/package-lock.json', '**/Gemfile.lock') }}"
+34|       - name: The job has succeeded
+35|         if: ${{ success() }}
+36|         run: echo "The job has succeeded."
+37|       - name: The job has failed
+38|         if: ${{ failure() }}
+39|         run: echo "The job has failed."
